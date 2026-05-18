@@ -1,12 +1,15 @@
 {
-  "name": "volta-base-template",
+  "name": "iamcaribbeing",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "data:parse": "node scripts/parse.mjs",
+    "data:images": "node scripts/download-images.mjs",
+    "data": "npm run data:parse && npm run data:images"
   },
   "dependencies": {
     "next": "latest",

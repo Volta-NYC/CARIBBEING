@@ -1,24 +1,45 @@
 import "./globals.css"
-import Navbar from "@/lib/components/navbar"
+import type { Metadata } from "next"
+import { Fraunces, Inter } from "next/font/google"
+import Header from "@/lib/components/header"
 import Footer from "@/lib/components/footer"
 
-export const metadata = {
-  title: "Business Name",
-  description: "Short description of the business."
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+})
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-sans",
+  display: "swap",
+})
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://iamcaribbeing.com"),
+  title: {
+    default: "I AM CARIBBEING — A Lifestyle Brand Redefining Caribbean Culture",
+    template: "%s · I AM CARIBBEING",
+  },
+  description:
+    "Caribbeing is a Brooklyn-born lifestyle brand at the crossroads of film + art + culture. Shop varsity sweatshirts, food tings, body care, books and Caribbean-rooted goods from Little Caribbean NYC.",
+  openGraph: {
+    type: "website",
+    siteName: "I AM CARIBBEING",
+    locale: "en_US",
+  },
+  twitter: { card: "summary_large_image" },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-1 max-w-6xl mx-auto px-6 py-12">
-          {children}
-        </main>
+    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+      <body className="min-h-screen flex flex-col font-sans bg-cream text-ink antialiased">
+        <Header />
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

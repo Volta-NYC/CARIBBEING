@@ -38,6 +38,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col font-sans bg-cream text-ink antialiased">
+        {/* Scroll-driven reading-progress bar (native CSS scroll timeline) */}
+        <div
+          aria-hidden
+          className="scroll-progress fixed top-0 left-0 right-0 z-[60] h-[3px] bg-flame"
+        />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

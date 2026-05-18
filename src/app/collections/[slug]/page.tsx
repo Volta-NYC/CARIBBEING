@@ -35,8 +35,8 @@ export default async function CollectionPage({ params }: { params: Promise<Param
           <p className="mt-4 text-bone/70">{items.length} tings curated with care.</p>
         </div>
         {cover && (
-          <div className="absolute inset-0 opacity-25">
-            <Image src={mediaSrc(cover)} alt="" fill priority sizes="100vw" className="object-cover" />
+          <div className="absolute inset-[-12%] opacity-25">
+            <Image src={mediaSrc(cover)} alt="" fill priority sizes="100vw" className="parallax object-cover" />
           </div>
         )}
       </section>

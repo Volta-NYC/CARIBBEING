@@ -105,7 +105,7 @@ export default function HomePage() {
 
       {/* SHOP BY COLLECTION */}
       <section className="container-x py-20 lg:py-28">
-        <div className="flex items-end justify-between gap-6 mb-10">
+        <div className="reveal flex items-end justify-between gap-6 mb-10">
           <div>
             <div className="text-xs uppercase tracking-widest2 text-moss mb-3">Shop by collection</div>
             <h2 className="font-display text-4xl sm:text-5xl tracking-tight">Tings we hand-pick.</h2>
@@ -115,7 +115,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5">
+        <div className="reveal-stagger grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-5">
           {featured.map((c, i) => {
             const cover = c.image || productsIn(c.slug)[0]?.images[0]
             const big = i === 0
@@ -150,7 +150,7 @@ export default function HomePage() {
       {/* FAVORITE TINGS */}
       <section className="bg-bone py-20 lg:py-28">
         <div className="container-x">
-          <div className="flex items-end justify-between gap-6 mb-10">
+          <div className="reveal flex items-end justify-between gap-6 mb-10">
             <div>
               <div className="text-xs uppercase tracking-widest2 text-moss mb-3">Shop our favorite tings</div>
               <h2 className="font-display text-4xl sm:text-5xl tracking-tight">Pull up. Stock up.</h2>
@@ -159,7 +159,7 @@ export default function HomePage() {
               See more →
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10">
+          <div className="reveal-stagger grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10">
             {favs.map((p, i) => (
               <ProductCard key={p.slug} product={p} priority={i < 4} />
             ))}
@@ -170,8 +170,12 @@ export default function HomePage() {
       {/* VISIT THE STORE */}
       <section className="relative">
         <div className="container-x py-20 lg:py-32 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="relative aspect-[4/5] rounded-md overflow-hidden shadow-soft">
-            {hero[3] && <Image src={mediaSrc(hero[3].images[0])} alt="1399 Nostrand" fill sizes="50vw" className="object-cover" />}
+          <div className="reveal-scale relative aspect-[4/5] rounded-md overflow-hidden shadow-soft">
+            {hero[3] && (
+              <div className="absolute inset-[-10%]">
+                <Image src={mediaSrc(hero[3].images[0])} alt="1399 Nostrand" fill sizes="50vw" className="parallax object-cover" />
+              </div>
+            )}
             <div className="absolute bottom-6 left-6 right-6 bg-cream/95 backdrop-blur p-6 rounded-md">
               <div className="text-xs uppercase tracking-widest2 text-moss">Flagship</div>
               <div className="font-display text-2xl mt-1">1399 Nostrand Ave</div>
@@ -179,7 +183,7 @@ export default function HomePage() {
               <div className="mt-3 text-sm">Sat &amp; Sun · 12pm – 6pm</div>
             </div>
           </div>
-          <div>
+          <div className="reveal">
             <div className="text-xs uppercase tracking-widest2 text-moss mb-3">Visit</div>
             <h2 className="font-display text-5xl sm:text-6xl tracking-tight leading-[0.95]">
               A third space rooted in <span className="italic text-flame">caribpolitan</span> culture.
@@ -213,7 +217,7 @@ export default function HomePage() {
       {journalPosts.length > 0 && (
         <section className="bg-moss text-bone py-20 lg:py-28">
           <div className="container-x">
-            <div className="flex items-end justify-between gap-6 mb-10">
+            <div className="reveal flex items-end justify-between gap-6 mb-10">
               <div>
                 <div className="text-xs uppercase tracking-widest2 text-sun mb-3">Di caribbeing journal</div>
                 <h2 className="font-display text-4xl sm:text-5xl tracking-tight">Stories from di diaspora.</h2>
@@ -222,7 +226,7 @@ export default function HomePage() {
                 Read more →
               </Link>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="reveal-stagger grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {journalPosts.map((post) => (
                 <Link href={`/journal/${post.slug}`} key={post.slug} className="group">
                   <div className="relative aspect-[4/3] rounded-md overflow-hidden bg-ink/40">
@@ -239,8 +243,9 @@ export default function HomePage() {
       )}
 
       {/* MISSION STRIP */}
-      <section className="container-x py-20 lg:py-28 text-center">
+      <section className="container-x py-20 lg:py-28 text-center reveal">
         <div className="text-xs uppercase tracking-widest2 text-flame mb-5">11 years strong · global movement</div>
+        <div className="draw-rule w-16 h-px bg-flame mx-auto mb-8" />
         <p className="font-display text-3xl sm:text-5xl leading-[1.1] tracking-tight max-w-4xl mx-auto">
           “Handcrafted here and back home, we curate unique &amp; unconventional collections for those who crave
           <span className="italic"> authenticity</span> and <span className="italic">cultural relevance</span>.”

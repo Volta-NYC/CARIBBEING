@@ -50,3 +50,72 @@ img { display: block; max-width: 100%; height: auto; }
 .prose-cari a { @apply underline underline-offset-4 decoration-flame/60 hover:decoration-flame; }
 .prose-cari hr { @apply my-8 border-ink/10; }
 .prose-cari ul { @apply mb-5 list-disc pl-6 space-y-1; }
+
+/* ---- Scroll-driven animations (native CSS) ----
+   Uses animation-timeline: view() — runs entirely off the scroll position,
+   no JS, no layout thrash. Progressive enhancement: elements are fully
+   visible by default and only opt into animation where supported. */
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes reveal-scale {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes parallax-rise {
+  from { transform: translateY(8%); }
+  to   { transform: translateY(-8%); }
+}
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Fade + rise as the element scrolls into the viewport */
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+    }
+    .reveal-scale {
+      animation: reveal-scale linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 32%;
+    }
+    /* Stagger helper — pair with .reveal on children */
+    .reveal-stagger > * {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    /* Gentle parallax for background/hero media */
+    .parallax {
+      animation: parallax-rise linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+    /* Rule/divider that draws itself in */
+    .draw-rule {
+      transform-origin: left;
+      animation: grow-x linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 20%;
+    }
+    /* Top-of-page reading-progress bar, driven by document scroll */
+    .scroll-progress {
+      transform-origin: left;
+      animation: grow-x linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+/* Fallback: where scroll timelines are unsupported, the bar tracks nothing —
+   keep it hidden so it never shows a half-state. */
+@supports not (animation-timeline: view()) {
+  .scroll-progress { display: none; }
+}
